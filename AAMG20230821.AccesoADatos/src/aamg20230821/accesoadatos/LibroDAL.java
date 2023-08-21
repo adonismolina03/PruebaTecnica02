@@ -78,6 +78,49 @@ public class LibroDAL {
         return result; // Retornar el numero de fila afectadas en el UPDATE en la base de datos 
     }
      
+     static int asignarDatosResultSet(Libro plibro, ResultSet pResultSet, int pIndex) throws Exception {
+        //  SELECT r.Id(indice 1),r.Nombre(indice 2) * FROM Rol
+        pIndex++;
+        plibro.setId(pResultSet.getInt(pIndex)); // index 1
+        pIndex++;
+        plibro.setTitulo(pResultSet.getString(pIndex)); // index 2
+        return pIndex;
+    }
+     
+     private static void obtenerDatos(PreparedStatement pPS, ArrayList<Libro> pRoles) throws Exception {
+        try (ResultSet resultSet = ComunDB.obtenerResultSet(pPS);) { // obtener el ResultSet desde la clase ComunDB
+            while (resultSet.next()) { // Recorrer cada una de la fila que regresa la consulta  SELECT de la tabla Rol
+                Libro rol = new Libro(); 
+                asignarDatosResultSet(rol, resultSet, 0); // Llenar las propiedaddes de la Entidad Rol con los datos obtenidos de la fila en el ResultSet
+                pRoles.add(rol); // Agregar la entidad Rol al ArrayList de Rol
+            }
+            resultSet.close(); // Cerrar el ResultSet
+        } catch (SQLException ex) {
+            throw ex; // Enviar al siguiente metodo el error al obtener ResultSet de la clase ComunDB   en el caso que suceda 
+        }
+    }
+     
+         // Metodo para obtener todos los registro de la tabla de Rol
+    public static ArrayList<Libro> obtenerTodos() throws Exception {
+        ArrayList<Libro> roles;
+        roles = new ArrayList<>();
+        try (Connection conn = ComunDB.obtenerConexion();) {// Obtener la conexion desde la clase ComunDB y encerrarla en try para cierre automatico
+            String sql = obtenerSelect(new Libro());  // Obtener la consulta SELECT de la tabla Rol
+            sql += agregarOrderBy(new Libro());  // Concatenar a la consulta SELECT de la tabla Rol el ORDER BY por Id 
+            try (PreparedStatement ps = ComunDB.createPreparedStatement(conn, sql);) { // Obtener el PreparedStatement desde la clase ComunDB
+                obtenerDatos(ps, roles); // Llenar el ArrayList de Rol con las fila que devolvera la consulta SELECT a la tabla de Rol
+                ps.close(); // Cerrar el PreparedStatement
+            } catch (SQLException ex) {
+                throw ex; // Enviar al siguiente metodo el error al ejecutar PreparedStatement en el caso que suceda
+            }
+            conn.close(); // Cerrar la conexion a la base de datos
+        } 
+        catch (SQLException ex) {
+            throw ex; // Enviar al siguiente metodo el error al obtener la conexion  de la clase ComunDB en el caso que suceda
+        }
+        return roles; // Devolver el ArrayList de Rol
+    }
+     
      
      
      
