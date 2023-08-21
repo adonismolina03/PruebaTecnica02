@@ -13,6 +13,7 @@ public class Libro {
     private String titulo;
     private String autor;
     private int añoPublicación;
+    private int top_aux;
 
 
     public int getId() {
@@ -46,4 +47,13 @@ public class Libro {
     public void setAñoPublicación(int añoPublicación) {
         this.añoPublicación = añoPublicación;
     }
+
+    public int getTop_aux() {
+        return top_aux;
+    }
+
+    public void setTop_aux(int top_aux) {
+        this.top_aux = top_aux;
+    }
+    
 }
