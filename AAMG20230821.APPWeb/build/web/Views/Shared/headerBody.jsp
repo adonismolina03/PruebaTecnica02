@@ -2,7 +2,7 @@
 <%@page import="utils.*"%>
 <nav>
     <div class="nav-wrapper blue">
-        <a href="Home" class="brand-logo">Control de tareas</a>
+        <a href="Home" class="brand-logo">Libreria</a>
         <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>       
         <ul class="right hide-on-med-and-down">  
             <li><a href="">Inicio</a></li>
