@@ -6,10 +6,9 @@ GO
 
 CREATE TABLE Libros (
     Id INT PRIMARY KEY IDENTITY(1,1),
-    titulo NVARCHAR(255) NOT NULL,
-    autor NVARCHAR(255) NOT NULL,
-    año_publicación INT NOT NULL
+    titulo NVARCHAR(255),
+    autor NVARCHAR(255),
+    año_publicación INT 
 );
 
-select * from Libros
 

@@ -37,7 +37,7 @@
                                 <label for="txtAutor">Autor</label>
                             </div> 
                              <div class="input-field col l3 s12">
-                                <input  id="txtAño" type="text" name="año_publicación" required class="validate" maxlength="50">
+                                 <input  id="txtAño" type="number" name="publicacion" required class="validate">
                                 <label for="txtAño">Año de Publicacion</label>
                             </div> 
                              

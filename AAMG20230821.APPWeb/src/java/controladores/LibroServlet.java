@@ -32,7 +32,7 @@ public class LibroServlet extends HttpServlet {
         }
         libro.setTitulo(Utilidad.getParameter(request, "titulo", ""));
         libro.setAutor(Utilidad.getParameter(request, "autor", ""));
-        libro.setAñoPublicación(Integer.parseInt(Utilidad.getParameter(request, "año_publicación", "0")));
+        libro.setAñoPublicación(Integer.parseInt(Utilidad.getParameter(request, "publicacion", "0")));
 
         // Devolver la instancia de la entidad Rol con los valores obtenidos del request.
         return libro;
