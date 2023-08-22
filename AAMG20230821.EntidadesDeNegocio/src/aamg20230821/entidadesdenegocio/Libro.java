@@ -15,7 +15,18 @@ public class Libro {
     private int añoPublicación;
     private int top_aux;
 
+    public Libro() {
+    }
 
+    public Libro(int id, String titulo, String autor, int añoPublicación) {
+        this.id = id;
+        this.titulo = titulo;
+        this.autor = autor;
+        this.añoPublicación = añoPublicación;
+    }
+
+
+    
     public int getId() {
         return id;
     }
@@ -55,5 +66,6 @@ public class Libro {
     public void setTop_aux(int top_aux) {
         this.top_aux = top_aux;
     }
+
     
 }

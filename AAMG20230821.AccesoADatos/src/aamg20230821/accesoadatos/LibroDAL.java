@@ -87,12 +87,12 @@ public class LibroDAL {
         return pIndex;
     }
      
-     private static void obtenerDatos(PreparedStatement pPS, ArrayList<Libro> pRoles) throws Exception {
+     private static void obtenerDatos(PreparedStatement pPS, ArrayList<Libro> pLibros) throws Exception {
         try (ResultSet resultSet = ComunDB.obtenerResultSet(pPS);) { // obtener el ResultSet desde la clase ComunDB
             while (resultSet.next()) { // Recorrer cada una de la fila que regresa la consulta  SELECT de la tabla Rol
                 Libro rol = new Libro(); 
                 asignarDatosResultSet(rol, resultSet, 0); // Llenar las propiedaddes de la Entidad Rol con los datos obtenidos de la fila en el ResultSet
-                pRoles.add(rol); // Agregar la entidad Rol al ArrayList de Rol
+                pLibros.add(rol); // Agregar la entidad Rol al ArrayList de Rol
             }
             resultSet.close(); // Cerrar el ResultSet
         } catch (SQLException ex) {
@@ -102,13 +102,13 @@ public class LibroDAL {
      
          // Metodo para obtener todos los registro de la tabla de Rol
     public static ArrayList<Libro> obtenerTodos() throws Exception {
-        ArrayList<Libro> roles;
-        roles = new ArrayList<>();
+        ArrayList<Libro> libros;
+        libros = new ArrayList<>();
         try (Connection conn = ComunDB.obtenerConexion();) {// Obtener la conexion desde la clase ComunDB y encerrarla en try para cierre automatico
             String sql = obtenerSelect(new Libro());  // Obtener la consulta SELECT de la tabla Rol
             sql += agregarOrderBy(new Libro());  // Concatenar a la consulta SELECT de la tabla Rol el ORDER BY por Id 
             try (PreparedStatement ps = ComunDB.createPreparedStatement(conn, sql);) { // Obtener el PreparedStatement desde la clase ComunDB
-                obtenerDatos(ps, roles); // Llenar el ArrayList de Rol con las fila que devolvera la consulta SELECT a la tabla de Rol
+                obtenerDatos(ps, libros); // Llenar el ArrayList de Rol con las fila que devolvera la consulta SELECT a la tabla de Rol
                 ps.close(); // Cerrar el PreparedStatement
             } catch (SQLException ex) {
                 throw ex; // Enviar al siguiente metodo el error al ejecutar PreparedStatement en el caso que suceda
@@ -118,7 +118,7 @@ public class LibroDAL {
         catch (SQLException ex) {
             throw ex; // Enviar al siguiente metodo el error al obtener la conexion  de la clase ComunDB en el caso que suceda
         }
-        return roles; // Devolver el ArrayList de Rol
+        return libros; // Devolver el ArrayList de Rol
     }
      
      

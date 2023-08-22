@@ -11,3 +11,5 @@ CREATE TABLE Libros (
     año_publicación INT NOT NULL
 );
 
+select * from Libros
+
