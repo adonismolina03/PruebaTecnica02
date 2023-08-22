@@ -84,6 +84,10 @@ public class LibroDAL {
         plibro.setId(pResultSet.getInt(pIndex)); // index 1
         pIndex++;
         plibro.setTitulo(pResultSet.getString(pIndex)); // index 2
+        pIndex++;
+        plibro.setAutor(pResultSet.getString(pIndex)); // index 2
+        pIndex++;
+        plibro.setAñoPublicación(pResultSet.getInt(pIndex)); // index 2
         return pIndex;
     }
      
